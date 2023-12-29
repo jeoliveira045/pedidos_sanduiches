@@ -7,4 +7,5 @@ import pedidos.sanduiches.entities.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>, JpaSpecificationExecutor<Produto> {
+
 }

@@ -2,12 +2,14 @@ package pedidos.sanduiches.rest;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pedidos.sanduiches.entities.Produto;
 import pedidos.sanduiches.repositories.ProdutoRepository;
+import pedidos.sanduiches.services.CarregarPlanilhaProdutoService;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -16,8 +18,18 @@ import java.util.List;
 public class ProdutoRest {
     private ProdutoRepository repository;
 
+    private CarregarPlanilhaProdutoService carregarPlanilhaProdutoService;
+
     @GetMapping
     public ResponseEntity<List<Produto>> findAll(){
         return ResponseEntity.ok(repository.findAll());
+    }
+
+    @PostMapping("/file-upload")
+    public void fileUpload(@RequestParam("file") MultipartFile file) throws FileNotFoundException {
+
+
+        carregarPlanilhaProdutoService.processExcelFile(file);
+
     }
 }

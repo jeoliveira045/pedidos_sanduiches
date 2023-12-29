@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.sql.Blob;
 
 @Data
 @Entity
@@ -16,8 +17,4 @@ public class Produto {
     private String nome;
 
     private BigDecimal precoUnitario;
-
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido_id;
 }
